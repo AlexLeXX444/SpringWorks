@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Persons list</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 60%;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid #ccc;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+  <h1>Users control panel</h1>
+  <div align="center">
+    <a href="http://localhost:8080/">Main page</a>
+    |
+    <a href="http://localhost:8080/person/add">Add new person</a>
+  </div>
+  <div>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Email</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="person : ${persons}">
+        <td th:text="${person.id}">ID</td>
+        <td th:text="${person.name}">Name</td>
+        <td th:text="${person.age}">Age</td>
+        <td th:text="${person.email}">Email</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  </body>
+</html>
