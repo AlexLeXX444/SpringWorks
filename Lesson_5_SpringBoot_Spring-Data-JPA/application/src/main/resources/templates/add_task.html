@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            max-width: 500px;
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+<h1>Add new task</h1>
+<div align="center">
+    <a href="http://localhost:8080/">Main page</a>
+    |
+    <a href="http://localhost:8080/task/list">All task list</a>
+    |
+    <a href="http://localhost:8080/task/list/select">Task by status list</a>
+</div>
+<div>
+    <form th:action="@{/task/add}" th:object="${task}" method="post">
+        <label for="taskText">Текст задачи:</label>
+        <input type="text" id="taskText" th:field="*{taskText}" required />
+
+        <button type="submit">Add task</button>
+    </form>
+</div>
+</body>
+</html>

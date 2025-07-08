@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+<h1>All tasks</h1>
+<div align="center">
+    <a href="http://localhost:8080/">Main page</a>
+    |
+    <a href="http://localhost:8080/task/list">All task list</a>
+    |
+    <a href="http://localhost:8080/task/list/select">Task by status list</a>
+</div>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Task text</th>
+            <th>Task class</th>
+            <th>Task date/time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.id}">ID</td>
+            <td th:text="${task.taskText}">Task text</td>
+            <td th:text="${task.taskClass.className}">Task class</td>
+            <td th:text="${#temporals.format(task.createdAt, 'dd-MM-yyyy HH:mm')}">Task date/time</td>
+            <td>
+                <a th:href="@{/task/edit/{id}(id=${task.id})}" class="btn btn-primary">Edit</a>
+            </td>
+            <td>
+                <form th:action="@{/task/delete}" method="post">
+                    <input type="hidden" name="taskId" th:value="${task.id}" />
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

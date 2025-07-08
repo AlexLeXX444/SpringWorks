@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+<h1>Tasks controller</h1>
+<div align="center">
+    <a href="http://localhost:8080/">Main page</a>
+    |
+    <a href="http://localhost:8080/task/add">Add new task</a>
+    |
+    <a href="http://localhost:8080/task/list">All task list</a>
+    |
+    <a href="http://localhost:8080/task/list/select">Task by status list</a>
+</div>
+<div align="center">
+    <a href="http://localhost:8080/task/list/select/not_started">Not started tasks</a>
+    |
+    <a href="http://localhost:8080/task/list/select/in_progress">Tasks in progress</a>
+    |
+    <a href="http://localhost:8080/task/list/select/closed">Closed tasks</a>
+</div>
+<div>
+    <h3 th:text="${status}"> </h3>
+</div>
+<div>
+    <div th:if="${#lists.isEmpty(tasks)}">
+        <p>Empty tasks list.</p>
+    </div>
+
+    <table th:if="${not #lists.isEmpty(tasks)}">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Task text</th>
+            <th>Task date/time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="task : ${tasks}">
+            <td th:text="${task.id}">ID</td>
+            <td th:text="${task.taskText}">Task text</td>
+            <td th:text="${#temporals.format(task.createdAt, 'dd-MM-yyyy HH:mm')}">Task date/time</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
