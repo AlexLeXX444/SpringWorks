@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add person</title>
+</head>
+<body>
+<h1>Add new person</h1>
+<div align="center">
+    <a href="http://localhost:8080/person/list">Persons list</a>
+    |
+    <a href="http://localhost:8080/person/add">Add new person</a>
+</div>
+<form th:action="@{/person/add}" th:object="${person}" method="post">
+    <div>
+        <label>Name:
+            <input type="text" th:field="*{name}" required />
+        </label>
+    </div>
+    <div>
+        <label>Age:
+            <input type="number" th:field="*{age}" required />
+        </label>
+    </div>
+    <div>
+        <label>Email:
+            <input type="email" th:field="*{email}" required />
+        </label>
+    </div>
+    <button type="submit">Save</button>
+</form>
+</body>
+</html>
