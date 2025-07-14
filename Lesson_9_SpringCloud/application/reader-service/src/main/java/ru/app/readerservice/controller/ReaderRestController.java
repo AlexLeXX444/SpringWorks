@@ -22,14 +22,18 @@ public class ReaderRestController {
     public ResponseEntity<Reader> getReaderById(@PathVariable Long id) {
         Optional<Reader> reader = readerService.getReaderById(id);
         if (reader.isPresent()) {
-            return new ResponseEntity<>(reader.get(), HttpStatus.OK);
+            return ResponseEntity.ok(reader.get());
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return ResponseEntity.notFound().build();
     }
 
     @GetMapping("/list")
-    public List<Reader> getReaders() {
-        return readerService.getAllReaders();
+    public ResponseEntity<List<Reader>> getReaders() {
+        List<Reader> readers =  readerService.getAllReaders();
+        if (readers.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(readers);
     }
 
     @PostMapping("/add")

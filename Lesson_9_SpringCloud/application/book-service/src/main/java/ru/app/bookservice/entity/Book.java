@@ -1,4 +1,4 @@
-package ru.app.readerservice.entity;
+package ru.app.bookservice.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,15 +12,29 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Reader {
+public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String author;
+
     private String name;
 
-    public Reader(String name) {
+    private int count;
+
+    public Book(String author, String name, int count) {
+        this.author = author;
         this.name = name;
+        this.count = count;
+    }
+
+    public void bookCountUp() {
+        this.count++;
+    }
+
+    public void bookCountDown() {
+        this.count--;
     }
 }
