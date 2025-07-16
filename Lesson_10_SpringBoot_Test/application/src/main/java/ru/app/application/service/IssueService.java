@@ -37,10 +37,13 @@ public class IssueService {
     public boolean closeIssue(long id) {
         Optional<Issue> closedIssue = issueRepository.findById(id);
         if (closedIssue.isPresent()) {
-            bookService.countUp(closedIssue.get().getBook().getId());
-            closedIssue.get().setEndAt(LocalDateTime.now());
-            issueRepository.save(closedIssue.get());
-            return true;
+            if (closedIssue.get().getIsActive()) {
+                bookService.countUp(closedIssue.get().getBook().getId());
+                closedIssue.get().setEndAt(LocalDateTime.now());
+                closedIssue.get().setActive(false);
+                issueRepository.save(closedIssue.get());
+                return true;
+            }
         }
         return false;
     }

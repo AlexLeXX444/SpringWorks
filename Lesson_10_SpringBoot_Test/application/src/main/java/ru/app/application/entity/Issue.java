@@ -42,4 +42,8 @@ public class Issue {
         this.reader = reader;
         this.book = book;
     }
+
+    public boolean getIsActive() {
+        return this.isActive;
+    }
 }
